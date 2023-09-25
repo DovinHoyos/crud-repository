@@ -3,6 +3,7 @@ package com.dovindev.repository.lists;
 import com.dovindev.models.Product;
 import com.dovindev.repository.ListRepository;
 import com.dovindev.repository.Direction;
+import com.dovindev.repository.exceptions.ReadDataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ProductListRepository extends ListRepository<Product> {
 
     @Override
-    public void update(Product product) {
+    public void update(Product product) throws ReadDataAccessException {
         Product p = getById(product.getId());
         p.setDescription(product.getDescription());
         p.setPrice(product.getPrice());

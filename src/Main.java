@@ -1,6 +1,10 @@
 import com.dovindev.models.Client;
 import com.dovindev.models.Product;
 import com.dovindev.repository.*;
+import com.dovindev.repository.exceptions.DataAccessException;
+import com.dovindev.repository.exceptions.DuplicateRecordDataAccessException;
+import com.dovindev.repository.exceptions.ReadDataAccessException;
+import com.dovindev.repository.exceptions.WriteDataAccesException;
 import com.dovindev.repository.lists.ClientListRepository;
 import com.dovindev.repository.lists.ProductListRepository;
 
@@ -9,6 +13,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        try {
         /*ExtendedRepository<Client> repository = new ClientListRepository();
         repository.save(new Client("Dovin", "Hoyos"));
         repository.save(new Client("Gisel", "Manquillo"));
@@ -43,21 +48,42 @@ public class Main {
 
         repository.getAll().forEach(System.out::println);*/
 
-        System.out.println("------------Products------------");
-        ExtendedRepository<Product> repoProducts = new ProductListRepository();
-        repoProducts.save(new Product("Pc Gamer", 1200));
-        repoProducts.save(new Product("Screen Asus 90Hz", 650));
-        repoProducts.save(new   Product("Logitech mechanical keyboard", 85));
-        repoProducts.save(new Product("Logitech mouse 8000Dpi", 55));
+            System.out.println("------------Products------------");
+            ExtendedRepository<Product> repoProducts = new ProductListRepository();
+            repoProducts.save(new Product("Pc Gamer", 1200));
+            repoProducts.save(new Product("Screen Asus 90Hz", 650));
+            repoProducts.save(new Product("Logitech mechanical keyboard", 85));
+            repoProducts.save(new Product("Logitech mouse 8000Dpi", 55));
 
-        List<Product> products = repoProducts.getAll(0, 3);
-        products.forEach(System.out::println);
+            /*Product producto = new Product("Logitech mouse 8000Dpi", 55);
+            repoProducts.save(producto);
+            repoProducts.save(producto);*/
 
-        System.out.println("Productos registrados: " + repoProducts.count());
+            List<Product> products = repoProducts.getAll(0, 3);
+            products.forEach(System.out::println);
 
-        Product productUpdated = new Product("Pc Gamer intel i9 11900k", 2000);
-        productUpdated.setId(1);
-        repoProducts.update(productUpdated);
-        repoProducts.getAll().forEach(System.out::println);
+            repoProducts.delete(4);
+
+            System.out.println("Productos registrados: " + repoProducts.count());
+
+            Product productUpdated = new Product("Pc Gamer intel i9 11900k", 2000);
+            productUpdated.setId(1);
+            repoProducts.update(productUpdated);
+            repoProducts.getAll().forEach(System.out::println);
+
+        }catch(DuplicateRecordDataAccessException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        catch (ReadDataAccessException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (WriteDataAccesException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (DataAccessException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
