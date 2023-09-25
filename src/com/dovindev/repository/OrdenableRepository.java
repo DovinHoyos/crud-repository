@@ -1,10 +1,9 @@
 package com.dovindev.repository;
 
-import com.dovindev.models.Client;
 
 import java.util.List;
 
-public interface OrdenableRepository {
+public interface OrdenableRepository<T> {
 
-    List<Client> getAll(String campo, Direction dir);
+    List<T> getAll(String campo, Direction dir);
 }

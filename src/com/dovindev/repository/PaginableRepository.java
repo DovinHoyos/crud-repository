@@ -1,10 +1,9 @@
 package com.dovindev.repository;
 
-import com.dovindev.models.Client;
 
 import java.util.List;
 
-public interface PaginableRepository {
+public interface PaginableRepository<T> {
 
-    List<Client> getAll(int from, int limit );
+    List<T> getAll(int from, int limit );
 }

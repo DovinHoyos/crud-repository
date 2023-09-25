@@ -1,14 +1,13 @@
 package com.dovindev.repository;
 
-import com.dovindev.models.Client;
 
 import java.util.List;
 
-public interface CrudRepository {
+public interface CrudRepository<T> {
 
-    List<Client> getAll();
-    Client getById(Integer id);
-    void save(Client client);
-    void update(Client client);
+    List<T> getAll();
+    T getById(Integer id);
+    void save(T t);
+    void update(T t);
     void delete(Integer id);
 }
