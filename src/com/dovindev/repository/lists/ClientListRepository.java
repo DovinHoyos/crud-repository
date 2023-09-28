@@ -3,6 +3,7 @@ package com.dovindev.repository.lists;
 import com.dovindev.models.Client;
 import com.dovindev.repository.ListRepository;
 import com.dovindev.repository.Direction;
+import com.dovindev.repository.exceptions.ReadDataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public  class ClientListRepository extends ListRepository<Client> {
 
     @Override
-    public void update(Client client) {
+    public void update(Client client) throws ReadDataAccessException {
         Client c = this.getById(client.getId());
         c.setName(client.getName());
         c.setLastname(client.getLastname());
