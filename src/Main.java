@@ -71,11 +71,10 @@ public class Main {
             repoProducts.update(productUpdated);
             repoProducts.getAll().forEach(System.out::println);
 
-        }catch(DuplicateRecordDataAccessException e){
+        } catch (DuplicateRecordDataAccessException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }
-        catch (ReadDataAccessException e) {
+        } catch (ReadDataAccessException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         } catch (WriteDataAccesException e) {
